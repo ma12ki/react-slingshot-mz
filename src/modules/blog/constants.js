@@ -1,5 +1,1 @@
-const moduleName = 'blog';
-
-export {
-  moduleName,
-};
+export const moduleName = 'blog';

@@ -1,3 +1,5 @@
+import { constants, reducers as blogReducers } from '../modules/blog';
+
 export default {
-  lol: (state = '') => state,
+  [constants.moduleName]: blogReducers
 };

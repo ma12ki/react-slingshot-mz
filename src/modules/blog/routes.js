@@ -4,8 +4,9 @@
 import React from 'react';
 
 import * as actionTypes from './actionTypes';
+import * as actions from './actions';
 import service from './service';
-import { CommentList, PostList } from './components';
+import { CommentList, PostList, PostDetails } from './components';
 
 const routes = {
   [actionTypes.ROUTE_POSTS]: {
@@ -14,22 +15,28 @@ const routes = {
     thunk: async (dispatch) => {
       const posts = await service.getPosts();
 
-      dispatch({ type: actionTypes.POSTS_LOADED, payload: posts });
+      dispatch(actions.postsLoaded(posts));
     },
   },
   [actionTypes.ROUTE_POST]: {
     path: '/posts/:id',
-    component: () => <PostList />,
+    component: () => <PostDetails />,
     thunk: async (dispatch, getState) => {
       const { id } = getState().location.payload;
       const post = await service.getPost(id);
 
-      dispatch({ type: actionTypes.POST_LOADED, payload: post });
+      dispatch(actions.postLoaded(post));
     },
   },
   [actionTypes.ROUTE_COMMENTS]: {
     path: '/posts/:id/comments',
     component: () => <CommentList />,
+    thunk: async (dispatch, getState) => {
+      const { id } = getState().location.payload;
+      const comments = await service.getComments(id);
+
+      dispatch(actions.commentsLoaded(comments));
+    },
   },
 };
 
