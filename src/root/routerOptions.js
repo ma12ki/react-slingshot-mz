@@ -3,19 +3,13 @@ import restoreScroll from 'redux-first-router-restore-scroll';
 import qs from 'qs';
 
 const options = {
-  // onBeforeChange: (dispatch, getState, action) => {
-  //   const { user, location: { routesMap } } = getState()
-  //   const allowed = isAllowed(action.type, user, routesMap)
-  //   if (!allowed) {
-  //     dispatch(redirect({ type: 'LOGIN' }))
-  //   }
-  // },
-  // onAfterChange: (dispatch, getState) => {
-  //   const { type } = getState().location
-
-  //   if (type === 'LOGIN') {
-  //     setTimeout(() => alert(alertMessage), 1500)
-  //   }
+  // this can be used to guard routes that require special permissions
+  // onBeforeChange: (dispatch, getState, { action, extra }) => {
+    // const { user, location: { routesMap } } = getState()
+    // const allowed = isAllowed(action.type, user, routesMap)
+    // if (!allowed) {
+    //   dispatch(redirect({ type: 'LOGIN' }))
+    // }
   // },
   querySerializer: qs,
   restoreScroll: restoreScroll()
