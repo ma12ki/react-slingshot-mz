@@ -5701,12 +5701,13 @@ reduce-function-call@^1.0.1:
   dependencies:
     balanced-match "^0.4.2"
 
-redux-first-router-link@1.4.1:
-  version "1.4.1"
-  resolved "https://registry.yarnpkg.com/redux-first-router-link/-/redux-first-router-link-1.4.1.tgz#fb5014ceb93ff3318a9881fdda9c115db86e17d2"
+redux-first-router-link@0.0.2-rudy:
+  version "0.0.2-rudy"
+  resolved "https://registry.yarnpkg.com/redux-first-router-link/-/redux-first-router-link-0.0.2-rudy.tgz#f70bd1ecde7443998402b0c762b5b02016c72904"
   dependencies:
     path-to-regexp "^1.7.0"
     prop-types "15.5.10"
+    rudy-history "^1.0.0"
     rudy-match-path "^0.3.0"
 
 redux-first-router-restore-scroll@1.2.1:
