@@ -1,4 +1,4 @@
-import apiService from '../../utils/apiService';
+import { apiService } from '../../utils';
 
 const getPosts = () => apiService.get('/posts');
 const getPost = (id) => apiService.get(`/posts/${id}`);
