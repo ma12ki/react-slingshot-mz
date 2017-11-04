@@ -1,9 +1,16 @@
+/* eslint-disable react/display-name */
+/* eslint-disable react/no-multi-comp */
+
+import React from 'react';
+
 import * as actionTypes from './actionTypes';
 import service from './service';
+import { CommentList, PostList } from './components';
 
-const routesMap = {
+const routes = {
   [actionTypes.ROUTE_POSTS]: {
     path: '/posts',
+    component: () => <PostList />,
     thunk: async (dispatch) => {
       const posts = await service.getPosts();
 
@@ -12,6 +19,7 @@ const routesMap = {
   },
   [actionTypes.ROUTE_POST]: {
     path: '/posts/:id',
+    component: () => <PostList />,
     thunk: async (dispatch, getState) => {
       const { id } = getState().location.payload;
       const post = await service.getPost(id);
@@ -21,7 +29,8 @@ const routesMap = {
   },
   [actionTypes.ROUTE_COMMENTS]: {
     path: '/posts/:id/comments',
+    component: () => <CommentList />,
   },
 };
 
-export default routesMap;
+export default routes;

@@ -32,11 +32,12 @@
   "dependencies": {
     "history": "4.7.2",
     "object-assign": "4.1.0",
+    "qs": "6.5.1",
     "react": "16.0.0",
     "react-dom": "16.0.0",
     "react-redux": "5.0.5",
     "redux": "3.6.0",
-    "redux-first-router": "0.0.16-next",
+    "redux-first-router": "0.0.4-rudy",
     "redux-first-router-link": "1.4.1",
     "redux-first-router-restore-scroll": "1.2.1",
     "redux-thunk": "2.1.0",
@@ -115,7 +116,14 @@
     "env": {
       "development": {
         "presets": [
-          "env",
+          [
+            "env",
+            {
+              "targets": {
+                "browsers": "IE 11"
+              }
+            }
+          ],
           "react",
           "react-hmre",
           "stage-1"
@@ -124,7 +132,14 @@
       "production": {
         "presets": [
           [
-            "env",
+            [
+              "env",
+              {
+                "targets": {
+                  "browsers": "IE 11"
+                }
+              }
+            ],
             {
               "es2015": {
                 "modules": false
