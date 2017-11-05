@@ -1,5 +1,6 @@
 import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+import Dotenv from 'dotenv-webpack';
 import path from 'path';
 
 export default {
@@ -21,6 +22,11 @@ export default {
     filename: 'bundle.js'
   },
   plugins: [
+    // load env variables
+    new Dotenv({
+      safe: true // load .env.example
+    }),
+
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('development'), // Tells React to build in either dev or prod modes. https://facebook.github.io/react/downloads.html (See bottom)
       __DEV__: true
