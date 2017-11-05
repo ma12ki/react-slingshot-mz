@@ -29,6 +29,8 @@
   "author": "mz",
   "license": "MIT",
   "dependencies": {
+    "dotenv": "4.0.0",
+    "dotenv-webpack": "1.5.4",
     "history": "4.7.2",
     "object-assign": "4.1.0",
     "qs": "6.5.1",

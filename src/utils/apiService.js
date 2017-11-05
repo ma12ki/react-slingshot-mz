@@ -1,6 +1,7 @@
+import { API_URL } from '../config';
 import http from './http';
 
-const baseUrl = 'https://jsonplaceholder.typicode.com';
+const baseUrl = API_URL;
 const baseOptions = {
   headers: {
     'Content-Type': 'application/json',
