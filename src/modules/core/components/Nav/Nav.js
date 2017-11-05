@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'redux-first-router-link';
 
-const activeStyle = { fontWeight: 'bold', textDecoration: 'underline' };
+const activeStyle = { fontWeight: 'bold', textDecoration: 'none' };
 
 const Nav = () => {
   return (
