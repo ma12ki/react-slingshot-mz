@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { routes } from '../../../../root';
+import Nav from '../Nav';
 
 // This is a class-based component because the current
 // version of hot reloading won't hot reload a stateless
@@ -16,9 +17,8 @@ export class App extends Component {
 
     return (
       <div>
-        <div>
-          {component}
-        </div>
+        <Nav />
+        {component}
       </div>
     );
   }
