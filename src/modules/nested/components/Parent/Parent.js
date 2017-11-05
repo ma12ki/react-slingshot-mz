@@ -23,6 +23,7 @@ import Child from '../Child';
 class Parent extends React.Component {
 
   componentDidMount() {
+    // eslint-disable-next-line no-console
     console.log('Parent mounted');
   }
 

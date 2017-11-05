@@ -19,6 +19,7 @@ import { getGrandchild } from '../../selectors';
 class Grandchild extends React.Component {
 
   componentDidMount() {
+    // eslint-disable-next-line no-console
     console.log('Grandchild mounted');
   }
 
