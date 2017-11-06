@@ -80,6 +80,8 @@
     "mockdate": "2.0.1",
     "node-sass": "4.5.3",
     "opn-cli": "3.1.0",
+    "postcss-cssnext": "3.0.2",
+    "postcss-import": "11.0.0",
     "postcss-loader": "2.0.6",
     "prompt": "1.0.0",
     "prop-types": "15.5.10",
@@ -106,7 +108,7 @@
   "jest": {
     "moduleNameMapper": {
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/tools/assetsTransformer.js",
-      "\\.(css|less)$": "<rootDir>/tools/assetsTransformer.js"
+      "\\.(css)$": "<rootDir>/tools/assetsTransformer.js"
     },
     "setupFiles": [
       "raf/polyfill",
@@ -117,14 +119,7 @@
     "env": {
       "development": {
         "presets": [
-          [
-            "env",
-            {
-              "targets": {
-                "browsers": "IE 11"
-              }
-            }
-          ],
+          "env",
           "react",
           "react-hmre",
           "stage-1"
@@ -133,14 +128,7 @@
       "production": {
         "presets": [
           [
-            [
-              "env",
-              {
-                "targets": {
-                  "browsers": "IE 11"
-                }
-              }
-            ],
+            "env",
             {
               "es2015": {
                 "modules": false
@@ -168,6 +156,10 @@
       }
     }
   },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions"
+  ],
   "eslintConfig": {
     "root": true,
     "extends": [

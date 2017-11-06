@@ -1,0 +1,14 @@
+.list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.item {
+  margin: 10px;
+  text-transform: uppercase;
+
+  & :global(.active) {
+    font-weight: bold;
+    text-decoration: none;
+  }
+}

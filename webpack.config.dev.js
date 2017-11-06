@@ -101,27 +101,25 @@ export default {
         ]
       },
       {
-        test: /(\.css|\.scss|\.sass)$/,
+        test: /\.css$/,
         exclude: /node_modules/,
         use: [
           'style-loader',
           {
             loader: 'css-loader',
             options: {
-              sourceMap: true
+              sourceMap: true,
+              modules: true,
+              importLoaders: 1,
+              localIdentName: '[name]__[local]___[hash:base64:5]'
             }
           }, {
             loader: 'postcss-loader',
             options: {
               plugins: () => [
-                require('autoprefixer')
+                require('postcss-import'),
+                require('postcss-cssnext'),
               ],
-              sourceMap: true
-            }
-          }, {
-            loader: 'sass-loader',
-            options: {
-              includePaths: [path.resolve(__dirname, 'src', 'scss')],
               sourceMap: true
             }
           }
