@@ -11,7 +11,7 @@ const Nav = () => {
       <li className={styles.item}><NavLink to={'/'} activeClassName={activeClassName} exact>Home</NavLink></li>
       <li className={styles.item}><NavLink to={'/posts'} activeClassName={activeClassName}>Blog (thunks)</NavLink></li>
       <li className={styles.item}><NavLink to={'/nested'} activeClassName={activeClassName}>Nested routes</NavLink></li>
-      <li className={styles.item}><a href="/something-that-does-not-exist">404</a></li>
+      <li className={styles.item}><a className={styles.extra} href="/something-that-does-not-exist">404</a></li>
     </ul>
   );
 };

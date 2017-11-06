@@ -1,3 +1,5 @@
+@import "./extra.css";
+
 @value primary from "../../../../styles/variables.css";
 
 .list {
