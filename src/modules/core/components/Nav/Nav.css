@@ -1,3 +1,5 @@
+@value primary from "../../../../styles/variables.css";
+
 .list {
   list-style-type: none;
   padding: 0;
@@ -10,5 +12,6 @@
   & :global(.active) {
     font-weight: bold;
     text-decoration: none;
+    color: primary;
   }
 }

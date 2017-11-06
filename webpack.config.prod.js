@@ -141,23 +141,23 @@ export default {
               loader: 'css-loader',
               options: {
                 minimize: true,
-                sourceMap: true
+                sourceMap: true,
+                modules: true,
+                importLoaders: 1,
+                localIdentName: '[name]__[local]___[hash:base64:5]'
               }
             }, {
               loader: 'postcss-loader',
               options: {
+                ident: 'postcss',
                 plugins: () => [
-                  require('autoprefixer')
+                  require('postcss-import'),
+                  require('postcss-cssnext'),
+                  require('postcss-modules-values'),
                 ],
                 sourceMap: true
               }
-            }, {
-              loader: 'sass-loader',
-              options: {
-                includePaths: [path.resolve(__dirname, 'src', 'scss')],
-                sourceMap: true
-              }
-            }
+            },
           ]
         })
       }

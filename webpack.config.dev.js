@@ -116,9 +116,11 @@ export default {
           }, {
             loader: 'postcss-loader',
             options: {
+              ident: 'postcss',
               plugins: () => [
                 require('postcss-import'),
                 require('postcss-cssnext'),
+                require('postcss-modules-values'),
               ],
               sourceMap: true
             }
