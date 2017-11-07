@@ -64,6 +64,9 @@ export default {
       trackJSToken: ''
     }),
 
+    // avoid unnecessary bundle name changes. https://webpack.js.org/guides/caching/#module-identifiers
+    new webpack.HashedModuleIdsPlugin(),
+
     // extract vendor js into a separate chunk for better caching
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
