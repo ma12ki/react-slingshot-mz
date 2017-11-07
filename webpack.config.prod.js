@@ -64,6 +64,20 @@ export default {
       trackJSToken: ''
     }),
 
+    // extract vendor js into a separate chunk for better caching
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      minChunks: (module) => {
+        return module.context && module.context.indexOf('node_modules') !== -1;
+      }
+    }),
+
+    // extract webpack bootstrap js into a separate chunk for better caching
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'manifest',
+      minChunks: Infinity
+    }),
+
     // Minify JS
     new webpack.optimize.UglifyJsPlugin({ sourceMap: true }),
   ],
