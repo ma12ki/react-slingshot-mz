@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { routes } from '../../../../root';
+import routes from '../../routes';
 import Nav from '../Nav';
 
 // This is a class-based component because the current

@@ -5,18 +5,14 @@ import React from 'react';
 import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 
-import './config';
-import { store as configureStore } from './root';
-import { components } from './modules/core';
+import { Main, store } from './modules/core';
 import './styles/base.css';
 
 require('./favicon.ico');
 
-const store = configureStore();
-
 render(
   <AppContainer>
-    <components.Main store={store} />
+    <Main store={store} />
   </AppContainer>,
   document.getElementById('app')
 );

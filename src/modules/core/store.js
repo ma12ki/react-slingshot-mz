@@ -5,39 +5,42 @@ import { connectRoutes } from 'redux-first-router';
 
 import routes from './routes';
 import options from './routerOptions';
-import reducers from './reducers';
+import { default as reducers } from './duck';
+import initialState from './initialState';
 
-const configureStoreProd = (initialState) => {
+let rootReducer;
+
+const configureStoreProd = () => {
   const {
     reducer,
     middleware,
     enhancer
   } = connectRoutes(routes, options);
 
-  const rootReducer = combineReducers({ ...reducers, location: reducer });
+  rootReducer = { ...reducers, location: reducer };
   const middlewares = applyMiddleware(middleware, thunk);
   const enhancers = compose(enhancer, middlewares);
 
-  return createStore(rootReducer, initialState, enhancers);
+  return createStore(combineReducers(rootReducer), initialState, enhancers);
 };
 
-const configureStoreDev = (initialState) => {
+const configureStoreDev = () => {
   const {
     reducer,
     middleware,
     enhancer
   } = connectRoutes(routes, options);
 
-  const rootReducer = combineReducers({ ...reducers, location: reducer });
+  rootReducer = { ...reducers, location: reducer };
   const middlewares = applyMiddleware(reduxImmutableStateInvariant(), middleware, thunk);
   const enhancers = composeEnhancers(enhancer, middlewares);
 
-  const store = createStore(rootReducer, initialState, enhancers);
+  const store = createStore(combineReducers(rootReducer), initialState, enhancers);
 
   if (module.hot) {
     // Enable Webpack hot module replacement for reducers
-    module.hot.accept('./reducers', () => {
-      const nextReducer = require('./reducers').default; // eslint-disable-line global-require
+    module.hot.accept('./duck', () => {
+      const nextReducer = require('./duck').default; // eslint-disable-line global-require
       store.replaceReducer(nextReducer);
     });
   }
@@ -51,4 +54,9 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
 
 const configureStore = process.env.NODE_ENV === 'production' ? configureStoreProd : configureStoreDev;
 
-export default configureStore;
+const store = configureStore();
+store.installedAsyncModules = {};
+store.asyncReducers = {};
+
+export default store;
+export { rootReducer };
