@@ -4,6 +4,7 @@ import Dotenv from 'dotenv-webpack';
 import path from 'path';
 
 export default {
+  mode: 'development',
   resolve: {
     extensions: ['*', '.js', '.jsx', '.json']
   },

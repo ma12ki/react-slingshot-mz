@@ -13,6 +13,7 @@ const GLOBALS = {
 };
 
 export default {
+  mode: 'production',
   resolve: {
     extensions: ['*', '.js', '.jsx', '.json']
   },
