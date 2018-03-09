@@ -4,6 +4,7 @@ import webpack from 'webpack';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import WebpackMd5Hash from 'webpack-md5-hash';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+import CircularDependencyPlugin from 'circular-dependency-plugin';
 import Dotenv from 'dotenv-webpack';
 import path from 'path';
 
@@ -29,6 +30,13 @@ export default {
     filename: '[name].[chunkhash].js'
   },
   plugins: [
+    // detect circular dependencies
+    new CircularDependencyPlugin({
+      exclude: /node_modules/,
+      failOnError: true,
+      cwd: process.cwd(),
+    }),
+
     // load env variables
     new Dotenv({
       safe: false // do not load .env.example
