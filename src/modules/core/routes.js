@@ -9,10 +9,17 @@ import { routes as dashboardRoutes } from '../dashboard';
 import { routes as nestedRoutes } from '../nested';
 import { NotFound } from '../shared';
 
+const importAsyncModule = () => import('../+async');
+
 export default {
   ...blogRoutes,
   ...dashboardRoutes,
   ...nestedRoutes,
+  'async/ROUTE_ASYNC': {
+    path: '/async',
+    asyncModule: importAsyncModule,
+    component: 'AsyncPage',
+  },
   [NOT_FOUND]: {
     component: () => <NotFound />
   },

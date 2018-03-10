@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import { combineReducers } from 'redux';
 
 import { default as store, rootReducer } from '../../store';
-// for redux-observable see https://github.com/redux-observable/redux-observable/blob/master/docs/recipes/AddingNewEpicsAsynchronously.md
-// import { epic$ } from '../../duck';
+import { epic$ } from '../../duck';
 
 class ModuleLoader extends React.Component {
   state = {
@@ -25,6 +24,7 @@ class ModuleLoader extends React.Component {
   loadAsyncModule = async (modulePromise) => {
     this.setState({ asyncModule: {}, loading: true });
     const asyncModule = await modulePromise;
+    console.log(asyncModule);
     installModule(asyncModule);
     this.setState({ asyncModule, loading: false });
   }
@@ -41,16 +41,16 @@ class ModuleLoader extends React.Component {
   }
 }
 
-const installModule = ({ moduleName, reducers /*, epics */ }) => {
+const installModule = ({ moduleName, reducers, epics }) => {
   if (!store.installedAsyncModules[moduleName]) {
     store.installedAsyncModules[moduleName] = true;
     if (reducers) {
       store.asyncReducers[moduleName] = reducers;
       installReducers(moduleName, reducers);
     }
-    // if (epics) {
-    //   installEpics(moduleName, epics);
-    // }
+    if (epics) {
+      installEpics(moduleName, epics);
+    }
   }
 };
 
@@ -62,9 +62,9 @@ const installReducers = (moduleName, reducers) => {
   }));
 };
 
-// const installEpics = (moduleName, epics) => {
-//   epic$.next(epics);
-// };
+const installEpics = (moduleName, epics) => {
+  epic$.next(epics);
+};
 
 ModuleLoader.propTypes = {
   modulePromise: PropTypes.object.isRequired,

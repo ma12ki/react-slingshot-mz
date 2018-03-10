@@ -2,10 +2,11 @@ import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
 import reduxImmutableStateInvariant from 'redux-immutable-state-invariant';
 import thunk from 'redux-thunk';
 import { connectRoutes } from 'redux-first-router';
+import { createEpicMiddleware } from 'redux-observable';
 
 import routes from './routes';
 import options from './routerOptions';
-import { default as reducers } from './duck';
+import { default as reducers, rootEpic } from './duck';
 import initialState from './initialState';
 
 let rootReducer;
@@ -18,7 +19,8 @@ const configureStoreProd = () => {
   } = connectRoutes(routes, options);
 
   rootReducer = { ...reducers, location: reducer };
-  const middlewares = applyMiddleware(middleware, thunk);
+  const epicMiddleware = createEpicMiddleware(rootEpic);
+  const middlewares = applyMiddleware(middleware, epicMiddleware, thunk);
   const enhancers = compose(enhancer, middlewares);
 
   return createStore(combineReducers(rootReducer), initialState, enhancers);
@@ -32,7 +34,8 @@ const configureStoreDev = () => {
   } = connectRoutes(routes, options);
 
   rootReducer = { ...reducers, location: reducer };
-  const middlewares = applyMiddleware(reduxImmutableStateInvariant(), middleware, thunk);
+  const epicMiddleware = createEpicMiddleware(rootEpic);
+  const middlewares = applyMiddleware(reduxImmutableStateInvariant(), middleware, epicMiddleware, thunk);
   const enhancers = composeEnhancers(enhancer, middlewares);
 
   const store = createStore(combineReducers(rootReducer), initialState, enhancers);

@@ -1,7 +1,13 @@
 import { combineReducers } from 'redux';
+import { combineEpics } from 'redux-observable';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/of';
+import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/delay';
 
 import { moduleName } from './constants';
-// import { apiService } from '../utils';
 
 //
 // actions
@@ -33,13 +39,14 @@ const data = (state = null, { type, payload }) => {
   }
 };
 
-const loading = (state = null, { type, payload }) => {
+const loading = (state = false, { type }) => {
   switch (type) {
     case ASYNC_REQUEST: {
-      return null;
+      return true;
     }
-    case ASYNC_RESPONSE: {
-      return payload;
+    case ASYNC_RESPONSE:
+    case ASYNC_ERROR: {
+      return false;
     }
     default: {
       return state;
@@ -49,10 +56,11 @@ const loading = (state = null, { type, payload }) => {
 
 const error = (state = null, { type, payload }) => {
   switch (type) {
-    case ASYNC_REQUEST: {
+    case ASYNC_REQUEST:
+    case ASYNC_RESPONSE: {
       return null;
     }
-    case ASYNC_RESPONSE: {
+    case ASYNC_ERROR: {
       return payload;
     }
     default: {
@@ -80,8 +88,21 @@ export const loadingSel = (state) => moduleSel(state).loading;
 export const errorSel = (state) => moduleSel(state).error;
 
 //
+// epics
+//
+const getAsyncDataEpic$ = action$ => action$
+  .ofType(ASYNC_REQUEST)
+  .switchMap(() => getAsyncData$()
+    .map(res => asyncResponse(res.data))
+    .catch(err => Observable.of(asyncError(err))));
+
+export const epics = combineEpics(
+  getAsyncDataEpic$,
+);
+
+//
 // services
 //
-// export const getPosts = () => apiService.get('/posts');
-// export const getPost = (id) => apiService.get(`/posts/${id}`);
-// export const getComments = (postId) => apiService.get(`/posts/${postId}/comments`);
+export const getAsyncData$ = () => Observable
+  .of({ data: "ohai, I'm async data from a dynamically loaded epic, from a dynamically loaded module" })
+  .delay(1000);
