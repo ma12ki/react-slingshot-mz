@@ -9,7 +9,7 @@ import { Parent } from './components';
 const routes = {
   [ROUTE_NESTED]: {
     path: '/nested/:child?/:grandchild?',
-    component: () => <Parent />,
+    component: <Parent />,
   },
 };
 

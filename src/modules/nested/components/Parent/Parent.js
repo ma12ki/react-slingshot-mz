@@ -6,20 +6,6 @@ import Link from 'redux-first-router-link';
 import { showChildSel } from '../../duck';
 import Child from '../Child';
 
-// const Parent = ({ showChild }) => {
-//   return (
-//     <div>
-//       <h1>I'm the parent</h1>
-//       <Link to={`/nested/someChild`}>show child</Link>
-//       <br />
-//       <Link to={`/nested/someChild/someGrandchild`}>show child and grandchild</Link>
-//       {showChild && <Child />}
-//     </div>
-//   );
-// };
-
-// componentDidMount just to verify that the parent does not get mounted again
-// when navigating through children
 class Parent extends React.Component {
 
   componentDidMount() {

@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 
 import routes from '../../routes';
 import Nav from '../Nav';
+import ModuleLoader from '../ModuleLoader';
 
 // This is a class-based component because the current
 // version of hot reloading won't hot reload a stateless
@@ -13,12 +14,15 @@ import Nav from '../Nav';
 export class App extends Component {
   render() {
     const { page } = this.props;
-    const component = routes[page].component();
+    const { asyncModule, component } = routes[page];
 
     return (
       <div>
         <Nav />
-        {component}
+        {asyncModule ?
+          <ModuleLoader modulePromise={asyncModule()} componentName={component} /> :
+          component
+        }
       </div>
     );
   }

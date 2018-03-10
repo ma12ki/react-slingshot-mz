@@ -1,1 +1,1 @@
-export default from './Grandchild';
+export { default } from './Grandchild';

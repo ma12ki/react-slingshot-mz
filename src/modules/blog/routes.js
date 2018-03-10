@@ -19,7 +19,7 @@ import { CommentList, PostList, PostDetails } from './components';
 const routes = {
   [ROUTE_POSTS]: {
     path: '/posts',
-    component: () => <PostList />,
+    component: <PostList />,
     thunk: async (dispatch) => {
       const posts = await getPosts();
 
@@ -28,7 +28,7 @@ const routes = {
   },
   [ROUTE_POST]: {
     path: '/posts/:id',
-    component: () => <PostDetails />,
+    component: <PostDetails />,
     thunk: async (dispatch, getState) => {
       const { id } = getState().location.payload;
       const post = await getPost(id);
@@ -38,7 +38,7 @@ const routes = {
   },
   [ROUTE_COMMENTS]: {
     path: '/posts/:id/comments',
-    component: () => <CommentList />,
+    component: <CommentList />,
     thunk: async (dispatch, getState) => {
       const { id } = getState().location.payload;
       const comments = await getComments(id);
