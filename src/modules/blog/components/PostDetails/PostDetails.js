@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Link from 'redux-first-router-link';
 
-import { getPost } from '../../selectors';
+import { postSel } from '../../duck';
 
 const PostDetails = ({ id, title, body }) => (
   <div>
@@ -25,8 +25,8 @@ PostDetails.defaultProps = {
   body: '',
 };
 
-const mapStateToProps = (state) => ({
-  ...getPost(state),
+const mapState = (state) => ({
+  ...postSel(state),
 });
 
-export default connect(mapStateToProps)(PostDetails);
+export default connect(mapState)(PostDetails);

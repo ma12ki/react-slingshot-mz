@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Link from 'redux-first-router-link';
 
-import { getShowChild } from '../../selectors';
+import { showChildSel } from '../../duck';
 import Child from '../Child';
 
 // const Parent = ({ showChild }) => {
@@ -45,8 +45,8 @@ Parent.propTypes = {
   showChild: PropTypes.bool.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  showChild: getShowChild(state),
+const mapState = (state) => ({
+  showChild: showChildSel(state),
 });
 
-export default connect(mapStateToProps)(Parent);
+export default connect(mapState)(Parent);

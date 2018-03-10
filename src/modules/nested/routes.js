@@ -3,11 +3,11 @@
 
 import React from 'react';
 
-import * as actionTypes from './actionTypes';
+import { ROUTE_NESTED } from './duck';
 import { Parent } from './components';
 
 const routes = {
-  [actionTypes.ROUTE_NESTED]: {
+  [ROUTE_NESTED]: {
     path: '/nested/:child?/:grandchild?',
     component: () => <Parent />,
   },

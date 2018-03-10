@@ -1,4 +1,4 @@
-import { API_URL } from '../config';
+import { API_URL } from '../../config';
 import http from './http';
 
 const baseUrl = API_URL;

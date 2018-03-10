@@ -3,11 +3,11 @@
 
 import React from 'react';
 
-import * as actionTypes from './actionTypes';
+import { ROUTE_HOME } from './duck';
 import { Home } from './components';
 
 const routes = {
-  [actionTypes.ROUTE_HOME]: {
+  [ROUTE_HOME]: {
     path: '/',
     component: () => <Home />,
   },

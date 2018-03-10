@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Link from 'redux-first-router-link';
 
-import { getGrandchild } from '../../selectors';
+import { grandchildSel } from '../../duck';
 
 // const Grandchild = ({ name }) => {
 //   return (
@@ -40,8 +40,8 @@ Grandchild.propTypes = {
   name: PropTypes.string,
 };
 
-const mapStateToProps = (state) => ({
-  name: getGrandchild(state),
+const mapState = (state) => ({
+  name: grandchildSel(state),
 });
 
-export default connect(mapStateToProps)(Grandchild);
+export default connect(mapState)(Grandchild);

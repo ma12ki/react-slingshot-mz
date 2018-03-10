@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Link from 'redux-first-router-link';
 
-import { getShowGrandchild, getChild } from '../../selectors';
+import { showGrandchildSel, childSel } from '../../duck';
 import Grandchild from '../Grandchild';
 
 const Child = ({ showGrandchild, name }) => {
@@ -23,9 +23,9 @@ Child.propTypes = {
   name: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  showGrandchild: getShowGrandchild(state),
-  name: getChild(state),
+const mapState = (state) => ({
+  showGrandchild: showGrandchildSel(state),
+  name: childSel(state),
 });
 
-export default connect(mapStateToProps)(Child);
+export default connect(mapState)(Child);

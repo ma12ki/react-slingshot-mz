@@ -1,3 +1,3 @@
-export * as actionTypes from './actionTypes';
-export * as constants from './constants';
+export { moduleName } from './constants';
+export * from './duck';
 export { default as routes } from './routes';

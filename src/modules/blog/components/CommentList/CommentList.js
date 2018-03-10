@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Link from 'redux-first-router-link';
 
-import { getComments } from '../../selectors';
+import { commentsSel } from '../../duck';
 
 const CommentList = ({ comments, postId }) => {
   const commentNodes = comments.map(({ id, name, email, body }) => (
@@ -26,9 +26,9 @@ CommentList.propTypes = {
   postId: PropTypes.number.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  comments: getComments(state),
+const mapState = (state) => ({
+  comments: commentsSel(state),
   postId: state.location.payload.id,
 });
 
-export default connect(mapStateToProps)(CommentList);
+export default connect(mapState)(CommentList);

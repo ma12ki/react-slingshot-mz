@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { getPosts } from '../../selectors';
+import { postsSel } from '../../duck';
 import PostItem from '../PostItem';
 
 const PostList = ({ posts }) => {
@@ -19,8 +19,8 @@ PostList.propTypes = {
   posts: PropTypes.array.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  posts: getPosts(state),
+const mapState = (state) => ({
+  posts: postsSel(state),
 });
 
-export default connect(mapStateToProps)(PostList);
+export default connect(mapState)(PostList);

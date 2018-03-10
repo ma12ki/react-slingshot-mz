@@ -3,39 +3,47 @@
 
 import React from 'react';
 
-import * as actionTypes from './actionTypes';
-import * as actions from './actions';
-import service from './service';
+import {
+  ROUTE_POSTS,
+  ROUTE_POST,
+  ROUTE_COMMENTS,
+  getPosts,
+  getPost,
+  getComments,
+  postLoaded,
+  postsLoaded,
+  commentsLoaded,
+} from './duck';
 import { CommentList, PostList, PostDetails } from './components';
 
 const routes = {
-  [actionTypes.ROUTE_POSTS]: {
+  [ROUTE_POSTS]: {
     path: '/posts',
     component: () => <PostList />,
     thunk: async (dispatch) => {
-      const posts = await service.getPosts();
+      const posts = await getPosts();
 
-      dispatch(actions.postsLoaded(posts));
+      dispatch(postsLoaded(posts));
     },
   },
-  [actionTypes.ROUTE_POST]: {
+  [ROUTE_POST]: {
     path: '/posts/:id',
     component: () => <PostDetails />,
     thunk: async (dispatch, getState) => {
       const { id } = getState().location.payload;
-      const post = await service.getPost(id);
+      const post = await getPost(id);
 
-      dispatch(actions.postLoaded(post));
+      dispatch(postLoaded(post));
     },
   },
-  [actionTypes.ROUTE_COMMENTS]: {
+  [ROUTE_COMMENTS]: {
     path: '/posts/:id/comments',
     component: () => <CommentList />,
     thunk: async (dispatch, getState) => {
       const { id } = getState().location.payload;
-      const comments = await service.getComments(id);
+      const comments = await getComments(id);
 
-      dispatch(actions.commentsLoaded(comments));
+      dispatch(commentsLoaded(comments));
     },
   },
 };

@@ -1,4 +1,6 @@
 import { moduleName } from './constants';
 
-// routes
+//
+// actions
+//
 export const ROUTE_HOME = `${moduleName}/ROUTE_HOME`;

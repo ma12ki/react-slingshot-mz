@@ -1,10 +1,18 @@
 import { combineReducers } from 'redux';
 
-import * as actionTypes from './actionTypes';
+import { moduleName } from './constants';
 
+//
+// actions
+//
+export const ROUTE_NESTED = `${moduleName}/ROUTE_NESTED`;
+
+//
+// reducers
+//
 const showChildReducer = (state = false, action = {}) => {
   switch (action.type) {
-    case actionTypes.ROUTE_NESTED: {
+    case ROUTE_NESTED: {
       return action.payload.child !== undefined;
     }
     default: {
@@ -15,7 +23,7 @@ const showChildReducer = (state = false, action = {}) => {
 
 const childReducer = (state = '', action = {}) => {
   switch (action.type) {
-    case actionTypes.ROUTE_NESTED: {
+    case ROUTE_NESTED: {
       return action.payload.child || '';
     }
     default: {
@@ -26,7 +34,7 @@ const childReducer = (state = '', action = {}) => {
 
 const showGrandchildReducer = (state = false, action = {}) => {
   switch (action.type) {
-    case actionTypes.ROUTE_NESTED: {
+    case ROUTE_NESTED: {
       return action.payload.grandchild !== undefined;
     }
     default: {
@@ -37,7 +45,7 @@ const showGrandchildReducer = (state = false, action = {}) => {
 
 const grandchildReducer = (state = '', action = {}) => {
   switch (action.type) {
-    case actionTypes.ROUTE_NESTED: {
+    case ROUTE_NESTED: {
       return action.payload.grandchild || '';
     }
     default: {
@@ -54,3 +62,13 @@ const reducer = combineReducers({
 });
 
 export default reducer;
+
+//
+// selectors
+//
+const moduleSel = (state) => state[moduleName];
+
+export const showChildSel = (state) => moduleSel(state).showChild;
+export const childSel = (state) => moduleSel(state).child;
+export const showGrandchildSel = (state) => moduleSel(state).showGrandchild;
+export const grandchildSel = (state) => moduleSel(state).grandchild;
