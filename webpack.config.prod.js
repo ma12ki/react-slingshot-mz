@@ -29,6 +29,24 @@ export default {
     publicPath: '/',
     filename: '[name].[chunkhash].js'
   },
+  optimization: {
+		splitChunks: {
+			cacheGroups: {
+				commons: {
+					chunks: "initial",
+					minChunks: 2,
+				},
+				vendor: {
+					test: /node_modules/,
+					chunks: "initial",
+					name: "vendor",
+					priority: 10,
+					enforce: true
+				}
+			}
+		},
+    minimize: true,
+  },
   plugins: [
     // detect circular dependencies
     new CircularDependencyPlugin({
@@ -78,23 +96,6 @@ export default {
 
     // avoid unnecessary bundle name changes. https://webpack.js.org/guides/caching/#module-identifiers
     new webpack.HashedModuleIdsPlugin(),
-
-    // extract vendor js into a separate chunk for better caching
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      minChunks: (module) => {
-        return module.context && module.context.indexOf('node_modules') !== -1;
-      }
-    }),
-
-    // extract webpack bootstrap js into a separate chunk for better caching
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'manifest',
-      minChunks: Infinity
-    }),
-
-    // Minify JS
-    new webpack.optimize.UglifyJsPlugin({ sourceMap: true }),
   ],
   module: {
     rules: [

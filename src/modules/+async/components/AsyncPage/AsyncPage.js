@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { asyncRequest, dataSel, loadingSel } from '../../duck';
+import styles from './AsyncPage.css';
 
 class AsyncPage extends React.PureComponent {
 
@@ -13,7 +14,7 @@ class AsyncPage extends React.PureComponent {
   render() {
     const { data, loading } = this.props;
     return (
-      <div>
+      <div className={styles.content}>
         {loading ? 'loading...' : data}
       </div>
     );
