@@ -7,6 +7,7 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 import CircularDependencyPlugin from 'circular-dependency-plugin';
 import Dotenv from 'dotenv-webpack';
 import workbox from 'workbox-webpack-plugin';
+import WebpackPwaManifest from 'webpack-pwa-manifest';
 import path from 'path';
 
 const GLOBALS = {
@@ -101,6 +102,20 @@ export default {
     // add workbox and precache manifest to service worker
     new workbox.InjectManifest({
       swSrc: path.resolve(__dirname, 'src', 'service-worker.js'),
+    }),
+
+    // add PWA manifest
+    new WebpackPwaManifest({
+      name: 'React Slingshot',
+      short_name: 'RS',
+      description: 'Awesome React starter project',
+      background_color: '#ffffff',
+      icons: [
+        {
+          src: path.resolve('src/assets/icon.png'),
+          size: 48,
+        },
+      ],
     }),
   ],
   module: {

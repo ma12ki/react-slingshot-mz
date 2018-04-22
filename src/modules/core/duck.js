@@ -17,6 +17,6 @@ export default {
 //
 // epics
 //
-const dummyEpic = action$ => action$.ofType('NONEXISTENT').do(console.log);
+const dummyEpic = action$ => action$.ofType('NONEXISTENT').do(() => {});
 export const epic$ = new BehaviorSubject(combineEpics(dummyEpic));
 export const rootEpic = (action$, store) => epic$.mergeMap(epic => epic(action$, store));
