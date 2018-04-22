@@ -45,7 +45,8 @@
     "redux-observable": "0.18.0",
     "redux-thunk": "2.2.0",
     "rxjs": "5.5.6",
-    "whatwg-fetch": "2.0.3"
+    "whatwg-fetch": "2.0.3",
+    "workbox-webpack-plugin": "3.1.0"
   },
   "devDependencies": {
     "autoprefixer": "8.1.0",

@@ -6,6 +6,7 @@ import WebpackMd5Hash from 'webpack-md5-hash';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import CircularDependencyPlugin from 'circular-dependency-plugin';
 import Dotenv from 'dotenv-webpack';
+import workbox from 'workbox-webpack-plugin';
 import path from 'path';
 
 const GLOBALS = {
@@ -96,6 +97,11 @@ export default {
 
     // avoid unnecessary bundle name changes. https://webpack.js.org/guides/caching/#module-identifiers
     new webpack.HashedModuleIdsPlugin(),
+
+    // add workbox and precache manifest to service worker
+    new workbox.InjectManifest({
+      swSrc: path.resolve(__dirname, 'src', 'service-worker.js'),
+    }),
   ],
   module: {
     rules: [

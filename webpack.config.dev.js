@@ -2,6 +2,7 @@ import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import CircularDependencyPlugin from 'circular-dependency-plugin';
 import Dotenv from 'dotenv-webpack';
+import workbox from 'workbox-webpack-plugin';
 import path from 'path';
 
 export default {
@@ -50,7 +51,13 @@ export default {
         collapseWhitespace: true
       },
       inject: true
-    })
+    }),
+
+    // add workbox and precache manifest to service worker
+    new workbox.InjectManifest({
+      exclude: /.*/, // do not precache any files in dev mode (causes issues with HMR and browser-sync)
+      swSrc: path.resolve(__dirname, 'src', 'service-worker.js'),
+    }),
   ],
   module: {
     rules: [
