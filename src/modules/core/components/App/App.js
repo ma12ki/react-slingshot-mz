@@ -20,7 +20,7 @@ export class App extends Component {
       <div>
         <Nav />
         {asyncModule ?
-          <ModuleLoader modulePromise={asyncModule()} componentName={component} /> :
+          <ModuleLoader loaderFn={asyncModule} componentName={component} /> :
           component
         }
       </div>
